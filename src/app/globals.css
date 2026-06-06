@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 11 11 15; /* #0b0b0f */
+  --primary: 229 9 20;    /* #e50914 */
+  --secondary: 20 20 20;  /* #141414 */
+  --text: 255 255 255;    /* #ffffff */
+
+  /* Motion System Easing Curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-netflix: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Motion System Duration Tokens */
+  --duration-fast: 200ms;
+  --duration-medium: 450ms;
+  --duration-slow: 900ms;
+  --duration-hero: 1400ms;
+}
+
+@layer base {
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--text));
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Custom thin Netflix scrollbar for rows */
+  .netflix-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .netflix-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .netflix-scrollbar::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 3px;
+  }
+  .netflix-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b20710;
+  }
+
+  /* Glassmorphism card utility */
+  .glass-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(229, 9, 20, 0.5);
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.25);
+  }
+
+  /* Cinematic Vignettes */
+  .vignette-bottom {
+    background: linear-gradient(to top, #0b0b0f 0%, rgba(11, 11, 15, 0.8) 20%, rgba(11, 11, 15, 0) 100%);
+  }
+
+  .vignette-top {
+    background: linear-gradient(to bottom, rgba(11, 11, 15, 0.9) 0%, rgba(11, 11, 15, 0.5) 40%, rgba(11, 11, 15, 0) 100%);
+  }
+
+  .vignette-left {
+    background: linear-gradient(to right, rgba(11, 11, 15, 0.95) 0%, rgba(11, 11, 15, 0.7) 30%, rgba(11, 11, 15, 0) 100%);
+  }
+
+  /* Hero glow */
+  .radial-glow {
+    background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.15) 0%, rgba(124, 58, 237, 0.05) 50%, transparent 100%);
+  }
+
+  /* Motion System transition helper utilities */
+  .transition-fast {
+    transition: all var(--duration-fast) var(--ease-out-expo);
+  }
+  .transition-medium {
+    transition: all var(--duration-medium) var(--ease-out-expo);
+  }
+  .transition-slow {
+    transition: all var(--duration-slow) var(--ease-out-expo);
+  }
+  .transition-hero {
+    transition: all var(--duration-hero) var(--ease-out-expo);
+  }
+}
+
+/* Custom Netflix-style logo letter zoom animations */
+@keyframes netflixIntro {
+  0% {
+    transform: scale(1);
+    filter: blur(0px);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4.5);
+    filter: blur(4px);
+    opacity: 0;
+  }
+}
+
+.animate-netflix-zoom {
+  animation: netflixIntro 2s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.6), 0 0 20px rgba(229, 9, 20, 0.4);
+}
+.text-glow-purple {
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.6), 0 0 20px rgba(124, 58, 237, 0.4);
+}
