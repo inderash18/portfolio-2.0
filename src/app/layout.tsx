@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   keywords: ["Inderash", "Full Stack Developer", "AI Enthusiast", "Netflix Portfolio", "B.Sc CSDA Student", "React Developer", "Next.js Portfolio", "Software Engineer India"],
   authors: [{ name: "Inderash" }],
   creator: "Inderash",
-  metadataBase: new URL("https://inderash-portfolio.vercel.app"),
+  metadataBase: new URL("https://inderash-dev.vercel.app/"),
   icons: {
     icon: "/icon.svg",
   },
