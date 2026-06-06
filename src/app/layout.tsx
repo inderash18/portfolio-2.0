@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://inderash-portfolio.vercel.app",
+    url: "https://inderash-dev.vercel.app/",
     title: "Inderash | Portfolio - Full Stack Developer",
     description: "Recruiter-focused, premium Netflix-inspired portfolio showcasing full stack projects, AI models, and real-time trackers.",
     siteName: "Inderash Portfolio",
