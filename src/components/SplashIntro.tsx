@@ -48,7 +48,8 @@ type Stage = "full" | "split" | "swoop" | "fadeout";
 
 export default function SplashIntro({ onComplete }: SplashIntroProps) {
   const [stage, setStage] = useState<Stage>("full");
-  const started = useRef(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const timeoutsRef = useRef<any[]>([]);
 
   /* Inject all keyframes into <head> once */
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function SplashIntro({ onComplete }: SplashIntroProps) {
       "@keyframes si-lum{0%{opacity:0}100%{opacity:1}}",
       "@keyframes si-ll{0%{transform:translateX(0) scaleX(1)}100%{transform:translateX(130px) scaleX(3)}}",
       "@keyframes si-lr{0%{transform:translateX(0) scaleX(1)}100%{transform:translateX(-130px) scaleX(3)}}",
+      "@keyframes si-pulse{from{opacity:0.35}to{opacity:0.95}}",
     ].join("");
     document.head.appendChild(tag);
     
@@ -73,55 +75,41 @@ export default function SplashIntro({ onComplete }: SplashIntroProps) {
     };
   }, []);
 
-  /* Web Audio */
+  /* Play custom intro sound */
   const playAudio = () => {
     try {
-      const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
-      if (!Ctx) return;
-      const ctx = new Ctx() as AudioContext;
-      const t = ctx.currentTime;
-      const master = ctx.createGain();
-      master.gain.value = 0.72;
-      master.connect(ctx.destination);
-
-      const tone = (freq: number, type: string, s: number, pk: number, vol: number, end: number) => {
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = type as OscillatorType;
-        o.frequency.value = freq;
-        g.gain.setValueAtTime(0, t + s);
-        g.gain.linearRampToValueAtTime(vol, t + pk);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + end);
-        o.connect(g); g.connect(master);
-        o.start(t + s); o.stop(t + end);
-      };
-
-      // Hum through whole intro
-      tone(55, "triangle", 0, 0.8, 0.7, 4.2);
-      // Rising tension as name appears
-      tone(110, "sawtooth", 0.3, 1.4, 0.3, 3.0);
-      tone(112, "sawtooth", 0.3, 1.4, 0.3, 3.0);
-      // Impact as I zooms (at t=2.7s = when swoop starts)
-      const sub = ctx.createOscillator();
-      const sg = ctx.createGain();
-      sub.type = "sine";
-      sub.frequency.setValueAtTime(160, t + 2.7);
-      sub.frequency.exponentialRampToValueAtTime(28, t + 3.6);
-      sg.gain.setValueAtTime(0, t + 2.7);
-      sg.gain.linearRampToValueAtTime(0.95, t + 2.76);
-      sg.gain.exponentialRampToValueAtTime(0.0001, t + 5.2);
-      sub.connect(sg); sg.connect(master);
-      sub.start(t + 2.7); sub.stop(t + 5.2);
-      // Chime shimmer
-      tone(987,  "sine", 2.85, 2.95, 0.22, 5.5);
-      tone(1480, "sine", 2.85, 2.95, 0.18, 5.5);
+      const audio = new Audio("/intro.mp3");
+      audio.volume = 0.72;
+      audio.play();
     } catch (_) { /* ignore */ }
   };
 
-  /* Auto-start animation sequence on mount */
+
+  /* Clean up timeouts on unmount */
   useEffect(() => {
-    // We start immediately in Phase 1 ("full")
-    playAudio();
+    return () => {
+      timeoutsRef.current.forEach(clearTimeout);
+    };
+  }, []);
+
+  const handleStart = () => {
+    if (hasStarted) return;
+    
+    // Synchronously unlock browser audio context on user gesture
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        ctx.resume();
+      }
+    } catch (_) {}
+
+    setHasStarted(true);
+    
+    // Play intro sound after 2 seconds
+    const tAudio = setTimeout(() => {
+      playAudio();
+    }, 2300);
     
     // Phase 2: NDERASH fades out (I stays)
     const t1 = setTimeout(() => setStage("split"), 1700);
@@ -132,13 +120,8 @@ export default function SplashIntro({ onComplete }: SplashIntroProps) {
     // Done
     const t4 = setTimeout(() => onComplete(), 6800);
 
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-    };
-  }, []);
+    timeoutsRef.current = [tAudio, t1, t2, t3, t4];
+  };
 
   // Shared font size — scales with viewport, max 130px
   const fs = "clamp(48px, 10vw, 130px)";
@@ -148,10 +131,42 @@ export default function SplashIntro({ onComplete }: SplashIntroProps) {
     fontWeight: 900,
     color: "#e50914",
     lineHeight: 1,
-    letterSpacing: "-0.03em",
+    letterSpacing: "0.03em",
     textShadow: "0 0 30px rgba(229,9,20,0.5), 0 0 80px rgba(229,9,20,0.2)",
     whiteSpace: "nowrap",
   };
+
+  if (!hasStarted) {
+    return (
+      <div 
+        onClick={handleStart}
+        style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          background: "#000", cursor: "pointer",
+          userSelect: "none",
+        }}
+      >
+        <div style={{ ...fontStyle, marginBottom: 20, animation: "si-fadein 1.2s ease-out forwards" }}>
+          INDERASH
+        </div>
+        <div style={{
+          color: "#fff",
+          fontSize: "clamp(12px, 2.5vw, 16px)",
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          opacity: 0.6,
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          fontWeight: 500,
+          animation: "si-pulse 1.4s infinite alternate ease-in-out",
+        }}>
+          <span style={{ color: "#e50914", fontSize: "1.2em" }}>▶</span> Click to Enter Cinematic Portfolio
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{

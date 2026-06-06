@@ -115,6 +115,7 @@ export default function ProfileSelector() {
                     src={profile.image}
                     alt={profile.name}
                     fill
+                    sizes="(max-width: 768px) 100px, 200px"
                     className={`object-cover ${manageMode ? "opacity-50" : ""}`}
                   />
                   {/* Subtle overlay when NOT hovered (Netflix dims inactive profiles slightly) */}
