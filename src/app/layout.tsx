@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   creator: "Inderash",
   metadataBase: new URL("https://inderash-dev.vercel.app/"),
   icons: {
-    icon: "/icon.svg",
+    icon: "/logo.jpg",
   },
   openGraph: {
     type: "website",
