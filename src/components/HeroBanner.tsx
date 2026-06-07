@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useApp } from "@/context/AppContext";
 import { Play, Info, Volume2, VolumeX } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
+import AICoreStatus from "./AICoreStatus";
 
 // Helper component for magnetic pull effect
 const MagneticWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -118,7 +119,7 @@ export default function HeroBanner() {
     <section
       ref={bannerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-[75vh] sm:h-[85vh] md:h-[95vh] flex items-center bg-[#0b0b0f] overflow-hidden select-none"
+      className="relative w-full min-h-screen pb-24 pt-24 md:pt-32 flex flex-col justify-center bg-[#0b0b0f] overflow-hidden select-none"
     >
       {/* Background Media Container */}
       <div className="absolute inset-0 w-full h-full z-0 bg-neutral-950">
@@ -187,7 +188,7 @@ export default function HeroBanner() {
       </div>
 
       {/* Hero Content Overlay */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-12 sm:mt-20">
+      <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-between">
         <div className="max-w-xl md:max-w-2xl flex flex-col space-y-5">
           {/* Netflix Originals Label */}
           <div className="flex items-center space-x-2">
@@ -277,6 +278,11 @@ export default function HeroBanner() {
               </button>
             </MagneticWrapper>
           </div>
+        </div>
+
+        {/* AI Core Status Panel on the right / below */}
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+          <AICoreStatus />
         </div>
       </div>
 

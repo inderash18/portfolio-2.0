@@ -1,0 +1,209 @@
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.slider-value-text {
+  color: #E50914;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.slider-wrapper {
+  display: flex;
+  width: 100%;
+  touch-action: none;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.slider-root {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.slider-root:active {
+  cursor: grabbing;
+}
+
+.slider-track-wrapper {
+  display: flex;
+  flex-grow: 1;
+}
+
+.slider-track {
+  position: relative;
+  height: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+.slider-range {
+  position: absolute;
+  height: 100%;
+  border-radius: 9999px;
+  background: #E50914;
+  box-shadow:
+    0 0 10px rgba(229,9,20,.5),
+    0 0 20px rgba(229,9,20,.3),
+    0 0 40px rgba(229,9,20,.2);
+  overflow: hidden;
+}
+
+.neural-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  animation: pulse-travel 2s infinite ease-in-out;
+}
+
+@keyframes pulse-travel {
+  0% { transform: translateX(-30px); }
+  100% { transform: translateX(800px); } /* large enough for the slider */
+}
+
+.slider-icon {
+  color: #fff;
+  opacity: 0.7;
+}
+
+.ai-core-status-panel {
+  background: rgba(11, 11, 11, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-core-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(229, 9, 20, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ai-core-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.ai-core-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.1em;
+}
+
+.ai-core-subtitle {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ai-core-confidence {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: rgba(229, 9, 20, 0.1);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.ai-core-confidence-label {
+  font-size: 0.6rem;
+  color: #E50914;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.ai-core-confidence-value {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.ai-core-sliders {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ai-core-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #E50914;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #E50914, 0 0 20px #E50914;
+  animation: blink 2s infinite ease-in-out;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}

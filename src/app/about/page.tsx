@@ -8,6 +8,18 @@ import { motion } from "framer-motion";
 import { GraduationCap, Trophy, Award, Calendar, Cpu, Layers, Code2, Database } from "lucide-react";
 import SkillsGalaxy from "@/components/SkillsGalaxy";
 import FlowingMenu from "@/components/FlowingMenu";
+import LogoLoop from "@/components/LogoLoop";
+import {
+  SiPython, SiTypescript, SiJavascript, SiReact, SiNextdotjs,
+  SiNodedotjs, SiFlask, SiDocker, SiNginx, SiMysql,
+  SiPostgresql, SiRedis, SiGit, SiVercel, SiTailwindcss,
+  SiCplusplus, SiNeo4J, SiHtml5, SiCss,
+} from "react-icons/si";
+import dynamic from "next/dynamic";
+
+const Lanyard = dynamic(() => import("@/components/Lanyard"), {
+  ssr: false,
+});
 
 interface TimelineEvent {
   year: string;
@@ -104,6 +116,17 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Interactive ID Card (Lanyard 3D Physics) */}
+        <section className="relative w-full h-[520px] bg-netflixDark/40 rounded-xl border border-white/5 shadow-2xl overflow-hidden mb-8">
+          <Lanyard position={[0, 0, 24]} gravity={[0, -40, 0]} transparent={true} />
+          
+          <div className="absolute bottom-6 left-0 right-0 text-center pointer-events-none z-10">
+            <span className="text-netflixRed text-[10px] font-bold uppercase tracking-[0.3em] bg-black/40 px-3 py-1 rounded-full border border-white/5 backdrop-blur-md">
+              Drag Card To Interact
+            </span>
+          </div>
+        </section>
+
         {/* Introduction & Stats */}
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div className="lg:col-span-2 space-y-4">
@@ -167,6 +190,64 @@ export default function AboutPage() {
           <h2 className="text-xl sm:text-2xl font-bold border-b border-netflixRed pb-2 inline-block mb-6">Skills & Core Expertise</h2>
           
           <SkillsGalaxy />
+
+          {/* ── LogoLoop Tech Ticker ── */}
+          <div className="space-y-4 py-4">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">Languages & Frameworks</p>
+            <div style={{ height: '64px', position: 'relative', overflow: 'hidden' }}>
+              <LogoLoop
+                logos={[
+                  { node: <SiPython />, title: 'Python', href: 'https://python.org' },
+                  { node: <SiTypescript />, title: 'TypeScript', href: 'https://typescriptlang.org' },
+                  { node: <SiJavascript />, title: 'JavaScript', href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+                  { node: <SiReact />, title: 'React', href: 'https://react.dev' },
+                  { node: <SiNextdotjs />, title: 'Next.js', href: 'https://nextjs.org' },
+                  { node: <SiNodedotjs />, title: 'Node.js', href: 'https://nodejs.org' },
+                  { node: <SiFlask />, title: 'Flask', href: 'https://flask.palletsprojects.com' },
+                  { node: <SiCplusplus />, title: 'C++', href: 'https://isocpp.org' },
+                  { node: <SiHtml5 />, title: 'HTML5', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+                  { node: <SiCss />, title: 'CSS3', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
+                  { node: <SiTailwindcss />, title: 'Tailwind CSS', href: 'https://tailwindcss.com' },
+                ]}
+                speed={90}
+                direction="left"
+                logoHeight={36}
+                gap={48}
+                hoverSpeed={0}
+                scaleOnHover
+                fadeOut
+                fadeOutColor="#141414"
+                ariaLabel="Languages and frameworks"
+                style={{ color: '#e50914' }}
+              />
+            </div>
+
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 pt-2">Databases & DevOps</p>
+            <div style={{ height: '64px', position: 'relative', overflow: 'hidden' }}>
+              <LogoLoop
+                logos={[
+                  { node: <SiMysql />, title: 'MySQL', href: 'https://mysql.com' },
+                  { node: <SiPostgresql />, title: 'PostgreSQL', href: 'https://postgresql.org' },
+                  { node: <SiRedis />, title: 'Redis', href: 'https://redis.io' },
+                  { node: <SiNeo4J />, title: 'Neo4j', href: 'https://neo4j.com' },
+                  { node: <SiDocker />, title: 'Docker', href: 'https://docker.com' },
+                  { node: <SiNginx />, title: 'Nginx', href: 'https://nginx.org' },
+                  { node: <SiGit />, title: 'Git', href: 'https://git-scm.com' },
+                  { node: <SiVercel />, title: 'Vercel', href: 'https://vercel.com' },
+                ]}
+                speed={70}
+                direction="right"
+                logoHeight={36}
+                gap={48}
+                hoverSpeed={0}
+                scaleOnHover
+                fadeOut
+                fadeOutColor="#141414"
+                ariaLabel="Databases and DevOps tools"
+                style={{ color: '#a78bfa' }}
+              />
+            </div>
+          </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {skillCategories.map((cat, index) => (

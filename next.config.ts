@@ -15,10 +15,22 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "api.microlink.io",
-      }
+      },
     ],
   },
+  webpack(config, { isServer }) {
+    // Enable WASM support for @react-three/rapier
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true,
+      layers: true,
+    };
+    return config;
+  },
+  turbopack: {}
 };
 
 export default nextConfig;
-//
+
+
+
