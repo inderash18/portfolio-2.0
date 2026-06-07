@@ -26,8 +26,7 @@ const nextConfig: NextConfig = {
       layers: true,
     };
     return config;
-  },
-  turbopack: {}
+  }
 };
 
 export default nextConfig;
