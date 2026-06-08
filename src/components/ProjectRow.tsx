@@ -89,7 +89,7 @@ export default function ProjectRow({ title, projects }: ProjectRowProps) {
         {/* Scroller Area */}
         <div
           ref={rowRef}
-          className="flex items-center space-x-3 sm:space-x-4 overflow-x-auto overflow-y-visible py-2 px-4 sm:px-6 lg:px-8 scroll-smooth no-scrollbar netflix-scrollbar"
+          className="flex items-center space-x-15 sm:space-x-10 overflow-x-auto overflow-y-visible py-2 px-4 sm:px-6 lg:px-8 scroll-smooth no-scrollbar netflix-scrollbar"
         >
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />

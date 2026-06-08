@@ -128,7 +128,7 @@ export default function ProjectsPage() {
           {filteredAndSortedProjects.length > 0 ? (
             <motion.div
               layout
-              className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-16 pt-4 justify-items-center"
+              className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-10 sm:gap-x-10 gap-y-15 sm:gap-y-16 pt-4 justify-items-center"
             >
               {filteredAndSortedProjects.map((project) => (
                 <motion.div

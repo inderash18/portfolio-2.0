@@ -13,10 +13,10 @@ export interface Project {
   features: string[];
   challenges: string;
   architecture: string;
-  matchPercentage: number; // Netflix-style "98% Match"
-  rating: "AI-18" | "FS-PG" | "SYS-MA" | "HARD-13"; // Developer rating
+  matchPercentage: number;
+  rating: "AI-18" | "FS-PG" | "SYS-MA" | "HARD-13";
   year: string;
-  duration: string; // Netflix style "duration" representing build time
+  duration: string;
   stars: number;
   forks: number;
   featured: boolean;
@@ -31,8 +31,7 @@ export const projectsData: Project[] = [
     longDescription: "CampusFinder AI completely redefines how lost and found systems work on busy university campuses. Instead of relying on manual searches and static lists, it employs artificial intelligence to bridge the gap. When a user reports a lost item, the system extracts key features using TF-IDF matching for descriptions and Perceptual Image Hashing (pHash) for image uploads. It automatically cross-references items in the database and assigns a confidence score, notifying both users when a high-probability match is found.",
     category: "AI & Machine Learning",
     tags: ["Python", "Flask", "TF-IDF NLP", "Image Hashing", "SQLite", "Tailwind CSS", "Framer Motion"],
-    imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-graphs-31907-large.mp4",
+    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200",
     githubUrl: "https://github.com/Inderash/CampusFinder-AI",
     liveUrl: "https://campusfinder-ai.example.com",
     features: [
@@ -59,8 +58,7 @@ export const projectsData: Project[] = [
     longDescription: "The College Bus Tracking System was designed to address shuttle scheduling inefficiencies. By utilizing GPS-enabled hardware / web nodes on buses, coordinates are piped into a Flask backend via WebSocket connections. The frontend renders real-time movements on dynamic map interfaces, updating bus indicators instantly. Includes push notification geofencing to alert students when a bus is 5 minutes away from their stop.",
     category: "Full Stack Web",
     tags: ["JavaScript", "Flask", "WebSockets", "Leaflet Maps", "GPS API", "Tailwind CSS"],
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000&auto=format&fit=crop",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-futuristic-holographic-hud-ui-screen-34440-large.mp4",
+    imageUrl: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=1200",
     githubUrl: "https://github.com/Inderash/college-bus-tracking",
     liveUrl: "https://bus-tracker.example.com",
     features: [
@@ -87,8 +85,7 @@ export const projectsData: Project[] = [
     longDescription: "A massive, production-grade College Portal System built to handle thousands of concurrent queries. It houses distinct portals for students, faculty, and administrative staff. Administrators can update class enrollments, faculty members can log grades and take attendance, and students can register for classes, view timetables, and download academic transcript sheets.",
     category: "Full Stack Web",
     tags: ["HTML5", "CSS3", "JavaScript", "Python", "Flask", "MySQL", "Role-Based Access Control"],
-    imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-typing-code-on-a-computer-screen-close-up-34437-large.mp4",
+    imageUrl: "https://images.pexels.com/photos/6238048/pexels-photo-6238048.jpeg?auto=compress&cs=tinysrgb&w=1200",
     githubUrl: "https://github.com/Inderash/college-portal-system",
     liveUrl: "https://portal.example.com",
     features: [
@@ -115,8 +112,7 @@ export const projectsData: Project[] = [
     longDescription: "The College AI Sentiment Analyzer leverages state-of-the-art transformers to parse text reviews. It compiles qualitative student opinions into quantitative executive reports. Administrators can immediately pinpoint common complaints, such as library opening hours or cafeteria options, through automated topic clustering and polarity scoring.",
     category: "AI & Machine Learning",
     tags: ["Flask", "Python", "Hugging Face", "Transformers", "BERT", "Chart.js", "Web Scraping"],
-    imageUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1000&auto=format&fit=crop",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-analysis-graphs-on-a-monitor-screen-34434-large.mp4",
+    imageUrl: "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1200",
     githubUrl: "https://github.com/Inderash/college-ai-sentiment-analyzer",
     liveUrl: "https://sentiment.example.com",
     features: [
@@ -143,7 +139,7 @@ export const projectsData: Project[] = [
     longDescription: "The Digital Voting Machine represents a hybrid hardware-software solution to secure student elections. Users authenticate their voter registration via a physical fingerprint sensor. The micro-controller validates biometric prints locally, unlocks a digital ballot screen for a single selection, registers the vote cryptographically, and locks the panel for the next user.",
     category: "Hardware & IoT",
     tags: ["C++", "Arduino", "Python", "SQLite", "Biometrics", "Hardware-Software Integration"],
-    imageUrl: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "https://images.pexels.com/photos/114907/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&w=1200",
     githubUrl: "https://github.com/Inderash/digital-voting-machine",
     features: [
       "Biometric Registration: Stores template hashes inside an secure EEPROM module",
@@ -169,7 +165,7 @@ export const projectsData: Project[] = [
     longDescription: "Designed to help research groups collect, aggregate, and distribute academic survey datasets safely. The Survey API Gateway manages authentication tokens, implements rate limiting to prevent DDoS attempts, handles cache validation headers, and routes queries dynamically based on endpoints.",
     category: "Systems & APIs",
     tags: ["Flask", "Redis", "JSON Web Tokens", "Docker", "Nginx", "Rate Limiting"],
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1200",
     githubUrl: "https://github.com/Inderash/survey-api-gateway",
     features: [
       "Custom JWT Auth: Cryptographically signed security tokens with automatic expiry times",
@@ -195,8 +191,7 @@ export const projectsData: Project[] = [
     longDescription: "Traditional university chat assistants struggle with multi-relational queries. The AI Help Bot solves this by storing campus regulations, course prerequisites, and faculty listings in a Neo4j Knowledge Graph. A Python NLP pipeline parses natural questions, extracts entities, and transforms inputs into Cypher queries, returning precise factual context.",
     category: "AI & Machine Learning",
     tags: ["Python", "Neo4j", "Graph Database", "NLP Spacy", "Flask API", "Tailwind CSS"],
-    imageUrl: "https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?q=80&w=1000&auto=format&fit=crop",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-artificial-intelligence-hud-scanning-a-human-face-34444-large.mp4",
+    imageUrl: "https://images.pexels.com/photos/8714952/pexels-photo-8714952.jpeg?auto=compress&cs=tinysrgb&w=1200",
     githubUrl: "https://github.com/Inderash/ai-help-bot",
     liveUrl: "https://helpbot.example.com",
     features: [

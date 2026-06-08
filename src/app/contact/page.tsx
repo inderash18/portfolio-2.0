@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import DetailModal from "@/components/DetailModal";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
@@ -20,6 +19,8 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
+  const [waPhone, setWaPhone] = useState("");
+  const [waError, setWaError] = useState("");
 
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
@@ -108,6 +109,24 @@ export default function ContactPage() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!waPhone.trim()) {
+      setWaError("Phone number is required");
+      return;
+    }
+    const cleaned = waPhone.replace(/[^\d+]/g, "");
+    if (cleaned.length < 7) {
+      setWaError("Please enter a valid number");
+      return;
+    }
+    setWaError("");
+    const messageText = `Hi Inderash, I am interested in collaborating! Let's connect. My WhatsApp number is: ${cleaned}`;
+    const encodedText = encodeURIComponent(messageText);
+    const targetUrl = `https://wa.me/916382860929?text=${encodedText}`;
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -216,6 +235,38 @@ export default function ContactPage() {
             </button>
           </form>
 
+          <div className="relative flex items-center justify-center my-6">
+            <div className="border-t border-white/10 w-full"></div>
+            <span className="absolute bg-[#070707] px-3 text-xs text-gray-500 uppercase tracking-widest">Or</span>
+          </div>
+
+          <form onSubmit={handleWhatsAppSubmit} className="space-y-3">
+            <div className="flex flex-col space-y-1">
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Your WhatsApp Number</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={waPhone}
+                  onChange={(e) => setWaPhone(e.target.value)}
+                  className={`flex-grow bg-[#141414] border rounded px-4 py-3 text-sm text-white focus:outline-none transition-colors ${
+                    waError ? "border-netflixRed focus:border-netflixRed" : "border-white/10 focus:border-emerald-500"
+                  }`}
+                  placeholder="e.g. +91 987654 3210"
+                />
+                <button
+                  type="submit"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 rounded tracking-wide transition-all duration-200 flex items-center justify-center space-x-1.5 cursor-pointer shadow-lg text-sm shrink-0"
+                >
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.488 1.449 5.412 1.451 5.928 0 10.755-4.827 10.758-10.756.002-2.874-1.113-5.576-3.137-7.602C17.65 1.22 14.948.104 12.006.104 6.079.104 1.252 4.93 1.249 10.86c-.001 1.953.5 3.848 1.454 5.46L1.758 21.82l5.7-.966zM17.15 14c-.282-.141-1.67-.824-1.928-.918-.258-.094-.446-.141-.634.141-.188.282-.728.918-.892 1.106-.164.188-.328.212-.61.071-.282-.141-1.192-.44-2.271-1.402-.84-.75-1.407-1.675-1.572-1.957-.164-.282-.018-.434.123-.574.127-.127.282-.329.424-.494.141-.165.188-.282.282-.47.094-.188.047-.353-.024-.494-.071-.141-.634-1.528-.868-2.092-.228-.549-.46-.474-.634-.484-.164-.008-.353-.01-.542-.01s-.494.071-.753.353c-.258.282-.987.964-.987 2.348s1.009 2.716 1.15 2.906c.141.188 1.984 3.029 4.81 4.25.672.29 1.2.463 1.61.593.676.214 1.29.184 1.777.112.542-.08 1.67-.682 1.905-1.34.235-.659.235-1.223.164-1.34-.07-.117-.258-.188-.54-.329z" />
+                  </svg>
+                  <span>Interested</span>
+                </button>
+              </div>
+              {waError && <span className="text-netflixRed text-xs font-bold mt-0.5">{waError}</span>}
+            </div>
+          </form>
+
           {/* Form response states notifications */}
           <AnimatePresence mode="wait">
             {submitStatus !== "idle" && (
@@ -247,7 +298,6 @@ export default function ContactPage() {
       </main>
 
       <DetailModal />
-      <Footer />
     </div>
   );
 }
