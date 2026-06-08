@@ -132,7 +132,7 @@ export default function AboutPage() {
           <div className="lg:col-span-2 space-y-4">
             <h2 className="text-xl sm:text-2xl font-bold border-b border-netflixRed pb-2 inline-block">Story Overview</h2>
             <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-              Hi, I&apos;m **Inderash**, a computer science student specializing in Data Analytics. My core drive is combining standard software engineering (Full Stack web platforms, secure database transactions) with modern AI advancements (Natural Language Processing, image similarity computation, and Knowledge Graphs).
+              Hi, I&apos;m <span className="text-netflixRed font-bold">Inderash</span>, a computer science student specializing in Data Analytics. My core drive is combining standard software engineering (Full Stack web platforms, secure database transactions) with modern AI advancements (Natural Language Processing, image similarity computation, and Knowledge Graphs).
             </p>
             <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
               Whether coding custom API Gateways with Redis rate-limiting, integrating biometric authentication hardware, or fine-tuning transformer models for forum sentiment analytics, I focus on performance, scalability, and exceptional UI design.
@@ -143,7 +143,7 @@ export default function AboutPage() {
           <div className="glass-card rounded-lg p-6 border border-white/10 shadow-xl grid grid-cols-2 gap-4">
             {stats.map((stat, i) => (
               <div key={i} className="text-center p-3 bg-white/5 rounded border border-white/5">
-                <div className="text-3xl sm:text-4xl font-extrabold text-netflixRed text-glow">{stat.value}</div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-netflixRed ">{stat.value}</div>
                 <div className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase mt-1 tracking-wider">{stat.label}</div>
               </div>
             ))}
@@ -192,9 +192,11 @@ export default function AboutPage() {
           <SkillsGalaxy />
 
           {/* ── LogoLoop Tech Ticker ── */}
-          <div className="space-y-4 py-4">
+          <div className="space-y-15 py-15">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">Languages & Frameworks</p>
-            <div style={{ height: '64px', position: 'relative', overflow: 'hidden' }}>
+            <br />
+            
+            <div style={{ height: '150px', position: 'relative', overflow: 'hidden' }}>
               <LogoLoop
                 logos={[
                   { node: <SiPython />, title: 'Python', href: 'https://python.org' },
@@ -208,6 +210,14 @@ export default function AboutPage() {
                   { node: <SiHtml5 />, title: 'HTML5', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
                   { node: <SiCss />, title: 'CSS3', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
                   { node: <SiTailwindcss />, title: 'Tailwind CSS', href: 'https://tailwindcss.com' },
+                   { node: <SiMysql />, title: 'MySQL', href: 'https://mysql.com' },
+                  { node: <SiPostgresql />, title: 'PostgreSQL', href: 'https://postgresql.org' },
+                  { node: <SiRedis />, title: 'Redis', href: 'https://redis.io' },
+                  { node: <SiNeo4J />, title: 'Neo4j', href: 'https://neo4j.com' },
+                  { node: <SiDocker />, title: 'Docker', href: 'https://docker.com' },
+                  { node: <SiNginx />, title: 'Nginx', href: 'https://nginx.org' },
+                  { node: <SiGit />, title: 'Git', href: 'https://git-scm.com' },
+                  { node: <SiVercel />, title: 'Vercel', href: 'https://vercel.com' },
                 ]}
                 speed={90}
                 direction="left"
@@ -220,33 +230,7 @@ export default function AboutPage() {
                 ariaLabel="Languages and frameworks"
                 style={{ color: '#e50914' }}
               />
-            </div>
-
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 pt-2">Databases & DevOps</p>
-            <div style={{ height: '64px', position: 'relative', overflow: 'hidden' }}>
-              <LogoLoop
-                logos={[
-                  { node: <SiMysql />, title: 'MySQL', href: 'https://mysql.com' },
-                  { node: <SiPostgresql />, title: 'PostgreSQL', href: 'https://postgresql.org' },
-                  { node: <SiRedis />, title: 'Redis', href: 'https://redis.io' },
-                  { node: <SiNeo4J />, title: 'Neo4j', href: 'https://neo4j.com' },
-                  { node: <SiDocker />, title: 'Docker', href: 'https://docker.com' },
-                  { node: <SiNginx />, title: 'Nginx', href: 'https://nginx.org' },
-                  { node: <SiGit />, title: 'Git', href: 'https://git-scm.com' },
-                  { node: <SiVercel />, title: 'Vercel', href: 'https://vercel.com' },
-                ]}
-                speed={70}
-                direction="right"
-                logoHeight={36}
-                gap={48}
-                hoverSpeed={0}
-                scaleOnHover
-                fadeOut
-                fadeOutColor="#141414"
-                ariaLabel="Databases and DevOps tools"
-                style={{ color: '#a78bfa' }}
-              />
-            </div>
+            </div>            
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -275,25 +259,29 @@ export default function AboutPage() {
         </section>
 
         {/* Explore More - Flowing Menu Integration */}
-        <section className="space-y-6 mt-16 pb-12">
-          <h2 className="text-xl sm:text-2xl font-bold border-b border-netflixRed pb-2 inline-block mb-6">Explore Destinations</h2>
-          <div style={{ height: '400px', position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <FlowingMenu 
-              items={[
-                { link: '/projects', text: 'Browse Projects', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop' },
-                { link: '/resume', text: 'View Resume', image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=600&auto=format&fit=crop' },
-                { link: '/contact', text: 'Get In Touch', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop' },
-                { link: '/', text: 'Return Home', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop' }
-              ]} 
-              speed={15}
-              textColor="#ffffff"
-              bgColor="#141414"
-              marqueeBgColor="#e50914"
-              marqueeTextColor="#ffffff"
-              borderColor="rgba(255,255,255,0.1)"
-            />
-          </div>
-        </section>
+        <section className="space-y-8 pt-8 pb-16">
+  <div className="inline-block">
+    <h2 className="text-2xl sm:text-3xl font-bold">Explore Destinations</h2>
+    <div className="h-1 w-12 bg-netflixRed mt-2 rounded-full" />
+  </div>
+  
+  <div className="relative w-full h-[420px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-300 hover:border-white/20">
+    <FlowingMenu 
+      items={[
+        { link: '/projects', text: 'Browse Projects', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop' },
+        { link: '/resume', text: 'View Resume', image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=600&auto=format&fit=crop' },
+        { link: '/contact', text: 'Get In Touch', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop' },
+        { link: '/', text: 'Return Home', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop' }
+      ]} 
+      speed={10}
+      textColor="#ffffff"
+      bgColor="#141010ff"
+      marqueeBgColor="#3c3636ff"
+      marqueeTextColor="#ffffff"
+      borderColor="rgba(100, 4, 254, 0.1)"
+    />
+  </div>
+</section>
 
       </main>
 
